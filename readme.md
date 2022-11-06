@@ -80,6 +80,30 @@ crawlersの画面で対象のクローラーに対してRunコマンドを投げ
 
 [指定のファイル数がS3バケットに到達したらGlueジョブを実行させる方法](https://blog.serverworks.co.jp/run-glue-workflow-when-the-files-is-reached)
 
+#### EventBrigeのターゲット先バケット設定
+
+~~特定のバケットは bucket/object も可能~~
+~~aws-glue-practice-pisakun/artifact/~~
+
+条件式をjsonに追加して特定のプレフィックスへのイベントに限定することも可能
+```json
+{
+  "source": ["aws.s3"],
+  "detail-type": ["Object Created"],
+  "detail": {
+    "bucket": {
+      "name": ["aws-glue-practice-pisakun"]
+    },
+    "object": {
+      "key": [{
+        "prefix": "artifact/"
+      }]
+    }
+  }
+}
+```
+
+[S3の特定パス配下にファイルが配置されたことを検知して、Amazon EventBridge(CloudwatchEvents)を実行する](https://www.cloudnotes.tech/entry/s3-prefix-cloudwatchevents)
 
 ### AWS Glue を 作成するための CloudFormation を組んでみました
 
