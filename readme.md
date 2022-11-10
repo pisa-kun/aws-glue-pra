@@ -138,3 +138,73 @@ $ aws s3api put-object --bucket python-gluejob-tomtom --key "out/"
 ```powershell
 $ aws s3 cp .\files\test_0001_20221109.csv s3://python-gluejob-tomtom
 ```
+
+#### ジョブ用のIAMロール作成
+
+- ロール名:pythonshell-etl-sample-role
+- ポリシー1:AWSGlueServiceRole(AWS Management)
+- ポリシー2:pythonshell-etl-sample-policy(Customer Management)
+
+[AWS CLI で IAM ロールを作成する](https://zenn.dev/y_u_t_a/articles/58257348c3754d)
+
+**カスタマー管理ポリシーの作成**
+
+```powershell
+aws iam create-policy --policy-name pythonshell-etl-sample-policy --policy-document file://policy/policy_document.json
+```
+
+S3へのアクセスポリシー
+```policy_document.json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "s3:PutObject",
+                "s3:GetObject"
+            ],
+            "Resource": "arn:aws:s3:::python-gluejob-tomtom/*"
+        }
+    ]
+}
+```
+
+**Arn**をメモしておくこと
+
+**IAMロールの作成とアタッチ**
+
+```glue_role.json
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": [
+                    "glue.amazonaws.com"
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+```
+
+```powershell
+aws iam create-role --role-name pythonshell-etl-sample-role --assume-role-policy-document file://policy/glue_role.json
+```
+
+
+```powershell
+aws iam attach-role-policy --role-name pythonshell-etl-sample-role --policy-arn arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole
+
+aws iam attach-role-policy --role-name pythonshell-etl-sample-role --policy-arn <作成したポリシーの ARN>
+```
+
+ロールにポリシー付与されているかの確認
+
+```
+aws iam list-attached-role-policies --role-name pythonshell-etl-sample-role
+```
