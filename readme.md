@@ -108,3 +108,33 @@ crawlersの画面で対象のクローラーに対してRunコマンドを投げ
 ### AWS Glue を 作成するための CloudFormation を組んでみました
 
 [AWS Glue を 作成するための CloudFormation を組んでみました](https://tech.fusic.co.jp/posts/2021-10-07-aws-glue-cloud-formation/)
+
+
+### AWS Glue Python Shell ジョブで CSV → Parquet 変換する ETL を実装する
+- 2022/11/11
+[AWS Glue Python Shell ジョブで CSV → Parquet 変換する ETL を実装する](https://blog.serverworks.co.jp/glue-pythonshell-parquet-etl)
+
+#### flow
+1. S3 から CSV ファイルをダウンロード
+1. CSV ファイルを Pandas DataFrame に読み込む
+1. データ加工（列を削除）
+1. Parquet に変換
+1. S3 にアップロード
+
+#### s3作成
+
+```powershell
+// バケット作成  
+$ aws s3 mb s3://python-gluejob-tomtom  
+// フォルダ構成に見せかけるためのオブジェクトを作成  
+$ aws s3api put-object --bucket python-gluejob-tomtom --key "in/"  
+$ aws s3api put-object --bucket python-gluejob-tomtom --key "out/"  
+```
+
+[AWSのS3で階層付きバケットフォルダをサクッと作る](https://open-groove.net/s3/s3-create-bucket-folders/)
+
+#### csvファイルのアップロード
+
+```powershell
+$ aws s3 cp .\files\test_0001_20221109.csv s3://python-gluejob-tomtom
+```
