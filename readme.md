@@ -229,10 +229,20 @@ script用s3バケットへのコピー
         "PythonVersion": "3",
         "ScriptLocation": "s3://python-gluejob-tomtom/glue-job.py"
     }, 
+        "DefaultArguments": {
+        "--TempDir":"s3://python-gluejob-tomtom/lib",
+        "--job-language":"python",
+        "--additional-python-modules":"mojimoji"
+    },
     "MaxRetries": 0, 
     "AllocatedCapacity": 5
 }
 ```
+
+[AWS Glue Python シェルスクリプトで新機能を使用する方法](https://aws.amazon.com/jp/blogs/big-data/aws-glue-python-shell-now-supports-python-3-9-with-a-flexible-pre-loaded-environment-and-support-to-install-additional-libraries/)
+
+**--additional-python-modules":"mojimoji** でライブラリを自動追加可能
+
 
 
 > aws glue create-job --cli-input-json file://job/glue-job.json

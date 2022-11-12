@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-#import mojimoji
+import mojimoji
 import datetime
 import boto3
 import io
@@ -42,8 +42,8 @@ isModel = df['serial'].str.startswith(("CF", "FZ"))
 df['serial'] = df[isModel]['serial'].apply(lambda serial: serial.replace('-', ''))
 
 # memoフィールドの英数字を全角から半角に
-# df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.zen_to_han(str, kana=False))
-# df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.han_to_zen(str, ascii=False, digit=False))
+df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.zen_to_han(str, kana=False))
+df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.han_to_zen(str, ascii=False, digit=False))
 
 # JST to UTC
 jst2utc = datetime.timedelta(hours=-9)

@@ -10,6 +10,11 @@
         "PythonVersion": "3",
         "ScriptLocation": "s3://python-gluejob-tomtom/glue-job.py"
     }, 
+    "DefaultArguments": {
+        "--TempDir":"s3://python-gluejob-tomtom/lib",
+        "--job-language":"python",
+        "--additional-python-modules":"mojimoji"
+    },
     "GlueVersion" : "3.0",
     "MaxRetries": 0, 
     "AllocatedCapacity": 5
