@@ -211,11 +211,10 @@ aws iam list-attached-role-policies --role-name pythonshell-etl-sample-role
 
 #### glue job の作成
 
-script用s3バケットの作成
-> aws s3 mb s3://python-glue-job-script
+script用s3バケットへのコピー
 
-> aws s3 cp .\scripts\glue-job.py s3://python-glue-job-script
-
+> aws s3 cp .\scripts\glue-job.py s3://python-gluejob-tomtom 
+> 
 ```glue-job.json
 {
     "Name": "test_job", 
@@ -228,7 +227,7 @@ script用s3バケットの作成
     "Command": {
         "Name": "glueetl", 
         "PythonVersion": "3",
-        "ScriptLocation": "s3://python-glue-job-script/glue-job.py"
+        "ScriptLocation": "s3://python-gluejob-tomtom/glue-job.py"
     }, 
     "MaxRetries": 0, 
     "AllocatedCapacity": 5

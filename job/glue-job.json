@@ -8,7 +8,7 @@
     "Command": {
         "Name": "glueetl", 
         "PythonVersion": "3",
-        "ScriptLocation": "s3://python-glue-job-script/glue-job.py"
+        "ScriptLocation": "s3://python-gluejob-tomtom/glue-job.py"
     }, 
     "GlueVersion" : "3.0",
     "MaxRetries": 0, 
