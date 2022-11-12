@@ -220,7 +220,7 @@ script用s3バケットの作成
 {
     "Name": "test_job", 
     "Description": "2022/11/12 test", 
-    "Role": "pythonshell", 
+    "Role": "pythonshell-etl-sample-role", 
     "ExecutionProperty": {
         "MaxConcurrentRuns": 1
     }, 
@@ -243,3 +243,11 @@ return
     "Name": "test_job"
 }
 ```
+
+
+#### run glue job
+
+> aws glue start-job-run --job-name test_job
+
+結果確認
+> aws s3 ls s3://python-gluejob-tomtom/out

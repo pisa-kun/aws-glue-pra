@@ -1,6 +1,6 @@
 import pandas as pd
 import re
-import mojimoji
+#import mojimoji
 import datetime
 import boto3
 import io
@@ -42,8 +42,8 @@ isModel = df['serial'].str.startswith(("CF", "FZ"))
 df['serial'] = df[isModel]['serial'].apply(lambda serial: serial.replace('-', ''))
 
 # memoフィールドの英数字を全角から半角に
-df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.zen_to_han(str, kana=False))
-df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.han_to_zen(str, ascii=False, digit=False))
+# df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.zen_to_han(str, kana=False))
+# df['memo'] = df[isModel]['memo'].apply(lambda str: mojimoji.han_to_zen(str, ascii=False, digit=False))
 
 # JST to UTC
 jst2utc = datetime.timedelta(hours=-9)
@@ -51,7 +51,7 @@ df['inputdate'] = df[isModel]['inputdate'].apply(lambda str: (datetime.datetime.
 
 # df型は列番号をもつので、indexは無視する
 df[isModel].to_csv(LOCAL_FILE_PATH + '/test_20221109.csv', index=False)
-df[isModel].to_parquet(LOCAL_FILE_PATH + "/test_20221109.parquet", index=False)
+#df[isModel].to_parquet(LOCAL_FILE_PATH + "/test_20221109.parquet", index=False)
 
 s3.meta.client.upload_file(LOCAL_FILE_PATH + '/test_20221109.csv', MY_BUCKET, 'out/test_20221109.csv')
 
