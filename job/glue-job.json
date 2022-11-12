@@ -1,7 +1,7 @@
 {
     "Name": "test_job", 
     "Description": "2022/11/12 test", 
-    "Role": "pythonshell", 
+    "Role": "pythonshell-etl-sample-role", 
     "ExecutionProperty": {
         "MaxConcurrentRuns": 1
     }, 
