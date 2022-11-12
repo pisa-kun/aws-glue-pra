@@ -265,3 +265,20 @@ AWS CLI で作成したジョブはデフォルトで Python 3 になります�
 
 結果確認
 > aws s3 ls s3://python-gluejob-tomtom/out
+
+### AWS CDK Glue Jobのデプロイ
+
+[AWS CDK — AWS Glue ジョブを使用してマネージド ETL をデプロイする](https://medium.com/@kargawal.abhishek/aws-cdk-deploy-managed-etl-using-aws-glue-job-1925098ec40f)
+
+#### Initialize CDK Project
+
+> cdk init app --language typescript
+
+#### Making Glue job IAM role
+
+packing install
+> npm install --save-dev @aws-cdk/aws-iam  
+> npm install --save-dev @aws-cdk/aws-s3  
+> npm install --save-dev @aws-cdk/aws-glue  
+> npm install --save-dev @aws-cdk/aws-s3-deployment
+

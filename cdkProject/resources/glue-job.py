@@ -8,7 +8,6 @@ import io
 print('script start.')
 
 MY_BUCKET = 'python-gluejob-tomtom'
-DST_BUCKET = 'cdk-glue-tomtom-bucket'
 LOCAL_FILE_PATH = '/tmp'
 
 file = 'in/test_0001_20221109.csv'
@@ -54,6 +53,6 @@ df['inputdate'] = df[isModel]['inputdate'].apply(lambda str: (datetime.datetime.
 df[isModel].to_csv(LOCAL_FILE_PATH + '/test_20221109.csv', index=False)
 #df[isModel].to_parquet(LOCAL_FILE_PATH + "/test_20221109.parquet", index=False)
 
-s3.meta.client.upload_file(LOCAL_FILE_PATH + '/test_20221109.csv', DST_BUCKET, 'out/test_20221109.csv')
+s3.meta.client.upload_file(LOCAL_FILE_PATH + '/test_20221109.csv', MY_BUCKET, 'out/test_20221109.csv')
 
 print("script complete.")
