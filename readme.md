@@ -224,8 +224,10 @@ script用s3バケットの作成
     "ExecutionProperty": {
         "MaxConcurrentRuns": 1
     }, 
+    "GlueVersion" : "3.0",
     "Command": {
         "Name": "glueetl", 
+        "PythonVersion": "3",
         "ScriptLocation": "s3://python-glue-job-script/glue-job.py"
     }, 
     "MaxRetries": 0, 
@@ -244,6 +246,9 @@ return
 }
 ```
 
+AWS CLI で作成したジョブはデフォルトで Python 3 になります。有効な Python バージョンは 3 (3.6 に対応) と 3.9 です。Python 3.6 を指定するには、--command パラメータにこのタプルを追加します: "PythonVersion":"3"。
+
+[AWS Glueでの Python シェルジョブ](https://docs.aws.amazon.com/ja_jp/glue/latest/dg/add-job-python.html)
 
 #### run glue job
 
