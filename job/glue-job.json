@@ -1,0 +1,14 @@
+{
+    "Name": "test_job", 
+    "Description": "2022/11/12 test", 
+    "Role": "pythonshell", 
+    "ExecutionProperty": {
+        "MaxConcurrentRuns": 1
+    }, 
+    "Command": {
+        "Name": "glueetl", 
+        "ScriptLocation": "s3://python-glue-job-script/glue-job.py"
+    }, 
+    "MaxRetries": 0, 
+    "AllocatedCapacity": 5
+}

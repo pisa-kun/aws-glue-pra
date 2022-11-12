@@ -208,3 +208,38 @@ aws iam attach-role-policy --role-name pythonshell-etl-sample-role --policy-arn 
 ```
 aws iam list-attached-role-policies --role-name pythonshell-etl-sample-role
 ```
+
+#### glue job の作成
+
+script用s3バケットの作成
+> aws s3 mb s3://python-glue-job-script
+
+> aws s3 cp .\scripts\glue-job.py s3://python-glue-job-script
+
+```glue-job.json
+{
+    "Name": "test_job", 
+    "Description": "2022/11/12 test", 
+    "Role": "pythonshell", 
+    "ExecutionProperty": {
+        "MaxConcurrentRuns": 1
+    }, 
+    "Command": {
+        "Name": "glueetl", 
+        "ScriptLocation": "s3://python-glue-job-script/glue-job.py"
+    }, 
+    "MaxRetries": 0, 
+    "AllocatedCapacity": 5
+}
+```
+
+
+> aws glue create-job --cli-input-json file://job/glue-job.json
+
+return
+
+```
+{
+    "Name": "test_job"
+}
+```
