@@ -282,3 +282,14 @@ packing install
 > npm install --save-dev @aws-cdk/aws-glue  
 > npm install --save-dev @aws-cdk/aws-s3-deployment
 
+#### cdk v2 でのs3記載
+```ts
+const glueS3Bucket = new cdk.aws_s3.Bucket(this, bucketName ,{
+      versioned: true,
+      bucketName: bucketName,
+      removalPolicy: cdk.RemovalPolicy.DESTROY,
+      blockPublicAccess: cdk.aws_s3.BlockPublicAccess.BLOCK_ALL,
+      autoDeleteObjects: true,
+    });
+
+```

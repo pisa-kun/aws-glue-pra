@@ -56,6 +56,13 @@ export class CdkProjectStack extends cdk.Stack {
       destinationBucket: glueS3Bucket
     });
 
+    // Deploy glue job to s3 bucket
+    new cdk.aws_s3_deployment.BucketDeployment(this, 'DeployTargetFiles', {
+      sources: [cdk.aws_s3_deployment.Source.asset('./files')],
+      destinationBucket: glueS3Bucket,
+      destinationKeyPrefix: 'in'
+    });
+
     // new cdk.aws_s3_deployment.BucketDeployment(this, 'DeployGlueJobFiles', {
     //   sources: [cdk.aws_s3_deployment.Source.asset('./resources')],
     //   destinationBucket: glueS3Bucket,
