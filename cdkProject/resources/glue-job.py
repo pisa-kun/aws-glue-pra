@@ -7,7 +7,7 @@ import io
 
 print('script start.')
 
-MY_BUCKET = 'python-gluejob-tomtom'
+MY_BUCKET = 'cdk-glue-tomtom-bucket'
 LOCAL_FILE_PATH = '/tmp'
 
 file = 'in/test_0001_20221109.csv'

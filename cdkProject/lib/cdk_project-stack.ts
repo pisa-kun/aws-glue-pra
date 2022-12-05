@@ -18,6 +18,7 @@ export class CdkProjectStack extends cdk.Stack {
     
     const glueS3Bucket = new cdk.aws_s3.Bucket(this, bucketName ,{
       versioned: true,
+      encryption: cdk.aws_s3.BucketEncryption.S3_MANAGED,
       bucketName: bucketName,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       blockPublicAccess: cdk.aws_s3.BlockPublicAccess.BLOCK_ALL,
