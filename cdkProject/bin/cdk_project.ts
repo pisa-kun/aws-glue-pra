@@ -19,3 +19,5 @@ new CdkProjectStack(app, 'CdkProjectStack', {
 
   /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
 });
+
+cdk.Tags.of(app).add("higuchi", "madoka");
